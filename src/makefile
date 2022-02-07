@@ -15,7 +15,6 @@ default: classes run
 classes: $(CLASSES:.java=.class)
 
 run:
-	$(J) Iperfer
-
+	$(J) Iperfer -c -h [hostname] -p 8080 -t 1000
 clean:
 	$(RM) *.class
