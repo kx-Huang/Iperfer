@@ -41,6 +41,6 @@ public class server {
 
     // calculate and print bytes sent and data rate
     dataRate = (byteReceived * 8 * 0.001) / (currentTime - startTime);
-    System.out.printf("received=%d KB rate=%.3f Mbps\n", byteReceived * 0.001, dataRate);
+    System.out.printf("received=%d KB rate=%.3f Mbps\n", byteReceived / 1000, dataRate);
   }
 }
