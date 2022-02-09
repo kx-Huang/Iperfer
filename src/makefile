@@ -10,11 +10,15 @@ CLASSES = \
 	server.java \
 	client.java
 
-default: classes run
+default: classes
 
 classes: $(CLASSES:.java=.class)
 
-run:
-	$(J) Iperfer -c -h [hostname] -p 8080 -t 1000
+client: classes
+	$(J) Iperfer -c -h localhost -p 8080 -t 10
+
+server: classes
+	$(J) Iperfer -s -p 8080
+
 clean:
 	$(RM) *.class
