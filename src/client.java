@@ -44,7 +44,7 @@ public class client {
     }
 
     // calculate and print bytes sent and data rate
-    dataRate = (kilobyteSent * 8) / (currentTime - startTime);
+    dataRate = (kilobyteSent * 8.0) / (currentTime - startTime);
     System.out.printf("sent=%d KB rate=%.3f Mbps\n", kilobyteSent, dataRate);
   }
 }
