@@ -15,7 +15,7 @@ default: classes
 classes: $(CLASSES:.java=.class)
 
 client: classes
-	$(J) Iperfer -c -h localhost -p 8080 -t 10
+	$(J) Iperfer -c -h localhost -p 8080 -t 2
 
 server: classes
 	$(J) Iperfer -s -p 8080
