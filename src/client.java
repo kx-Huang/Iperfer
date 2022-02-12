@@ -28,11 +28,12 @@ public class client {
 
       // keep sending data in specified time interval
       startTime = System.currentTimeMillis();
+      currentTime = System.currentTimeMillis();
       while (currentTime - startTime < (duration * 1000)) {
-        currentTime = System.currentTimeMillis();
         out.write(kilobyteData);
         out.flush();
         kilobyteSent++;
+        currentTime = System.currentTimeMillis();
       }
 
       // close socket
