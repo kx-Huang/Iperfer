@@ -21,7 +21,7 @@ Configure and Run Iperfer as server and client on each end of the network to be 
 1. Client Mode
 
     ```sh
-    $ java Iperfer -c -h [server hostname] -p [server port] -t [time
+    $ java Iperfer -c -h [server hostname] -p [server port] -t [time]
     ```
 
     - `-c` indicates this is the *Iperfer* **client** which should generate data.
