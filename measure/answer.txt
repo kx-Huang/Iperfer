@@ -1,0 +1,84 @@
+Q2: Path Latency and Throughput
+
+    - Expected Latency and Throughput
+        - Latency: sum(40, 10, 30) = 80 ms
+        - Throughput: min(20, 40, 30) = 20 Mbps
+
+    - Measured Latency and Throughput
+        - Latency: 80.212 ms (Average RTT: 160.423 ms)
+        - Throughput: 18.588 Mbps
+
+    - Explanation:
+        - Expected latency is the latencies sum of the links along the path.
+        - Expected throughput is the minimum throughput of the links along the path due to the bottleneck effect.
+
+Q3: Effects of Multiplexing
+
+    - Expected Latency and Throughput for 2 pairs
+        - h7 ~ h9
+            - Latency: sum(40, 10, 30) = 80 ms
+            - Throughput: 1/2 * min(20, 40, 30) = 10 Mbps
+        - h8 ~ h10
+            - Latency: sum(40, 10, 30) = 80 ms
+            - Throughput: 1/2 * min(20, 40, 30) = 10 Mbps
+
+    - Measured Latency and Throughput for 2 pairs
+        - h7 ~ h9
+            - Latency: 80.567 ms (Average RTT: 161.133 ms)
+            - Throughput: 8.179 Mbps
+        - h8 ~ h10
+            - Latency: 80.619 ms (Average RTT: 161.238 ms)
+            - Throughput: 10.714 Mbps
+
+    - Expected Latency and Throughput for 3 pairs
+        - h1 ~ h4
+            - Latency: sum(40, 10, 30) = 80 ms
+            - Throughput: 1/3 * min(20, 40, 30) = 6.666 Mbps
+        - h7 ~ h9
+            - Latency: sum(40, 10, 30) = 80 ms
+            - Throughput: 1/3 * min(20, 40, 30) = 6.666 Mbps
+        - h8 ~ h10
+            - Latency: sum(40, 10, 30) = 80 ms
+            - Throughput: 1/3 * min(20, 40, 30) = 6.666 Mbps
+
+    - Measured Latency and Throughput for 3 pairs
+        - h1 ~ h4
+            - Latency: 80.718 ms (Average RTT: 161.436 ms)
+            - Throughput: 3.885 Mbps
+        - h7 ~ h9
+            - Latency: 80.235 ms (Average RTT: 160.469 ms)
+            - Throughput: 5.667 Mbps
+        - h8 ~ h10
+            - Latency: 81.087 ms (Average RTT: 162.174 ms)
+            - Throughput: 9.484 Mbps
+
+    - Explanation:
+        - Expected latency is the latencies sum of the links along the path.
+        - Expected throughput is the minimum throughput of the links along the path divided by the number of connections, since they have to share the resources of the links.
+        - Measured throughput is not consistent with the expected throughput due to the human error, since we couldn't start the 3 tests at the exact same time. As a result, the first connected host (h8 ~ h10) has the highest throughput, the second connected host (h7 ~ h9) has the middle throughput, and the last connected host (h1 ~ h4) has the lowest throughput.
+
+Q4: Effects of Latency
+
+    - Expected Latency and Throughput
+        - h1 ~ h4
+            - Latency: sum(40, 10, 30) = 80 ms
+            - Throughput: min(20, 40, 30) - 1/2 * {[min(20, 40, 30) + min(25, 40, 25) - 40} = 17.5 Mbps
+        - h5 ~ h6
+            - Latency: sum(5, 10, 5) = 20 ms
+            - Throughput: min(25, 40, 25) - 1/2 * {[min(20, 40, 30) + min(25, 40, 25) - 40} = 22.5 Mbps
+
+    - Measured Latency and Throughput
+        - h1 ~ h4
+            - Latency: 80.678 ms (Average RTT: 161.356 ms)
+            - Throughput: 16.478 Mbps
+        - h5 ~ h6
+            - Latency: 20.568 ms (Average RTT: 41.135 ms)
+            - Throughput: 21.330 Mbps
+
+    - Explanation:
+        - Expected latency is the latencies sum of the links along the path.
+        - Expected throughput is the minimum throughput of the links along the path due to the bottleneck effect:
+            - If we only connect h1 ~ h4, the throughput is 20 Mbps. If we only connect h5 ~ h6, the throughput is 25 Mbps.
+            - Link L2 has bandwidth 40 Mbps, which is not enough for 45 Mbps for both h1 ~ h4 and h5 ~ h6.
+            - The loss should be equally distributed on two connections, so both h1 ~ h4 and h5 ~ h6 shares 2.5 Mbps loss.
+            - As a result, the expected throughput for h1 ~ h4 is 17.5 Mbps, and the expected throughput for h5 ~ h6 is 22.5 Mbps.
